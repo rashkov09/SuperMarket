@@ -5,6 +5,8 @@ import application.supermarket.repository.SellerRepository;
 import application.supermarket.service.SellerService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SellerServiceImpl implements SellerService {
     private final SellerRepository sellerRepository;
@@ -21,5 +23,10 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public Seller getByFirstNameAndLastName(String firstName, String lastName) {
         return sellerRepository.getByFirstNameAndLastName(firstName,lastName);
+    }
+
+    @Override
+    public List<Seller> getSellersByShopId(Long id) {
+        return sellerRepository.getSellersByShopId(id);
     }
 }

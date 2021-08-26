@@ -73,4 +73,9 @@ public class Product extends BaseEntity{
     public void setShops(Set<Shop> shops) {
         this.shops = shops;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s - %.2f $",getName(),getPrice());
+    }
 }

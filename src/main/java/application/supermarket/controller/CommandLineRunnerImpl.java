@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -52,6 +53,8 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
                 case 5 -> addProduct();
                 case 6 -> setManager();
                 case 7 -> distributeProduct();
+                case 8 -> getSellersByShop();
+                case 9 -> showAllProductsInSpecificShop();
 
                 default -> {
                     System.out.println("Incorrect command, please try again!");
@@ -59,6 +62,26 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
             }
         }
 
+    }
+
+    private void showAllProductsInSpecificShop() throws IOException {
+        System.out.println("Enter shop name:");
+        Shop shop = shopService.getShopByName(reader.readLine());
+        if (shop != null){
+        productService.getProductsByShopId(shop.getId()).stream().map(Product::toString).forEach(System.out::println);
+
+        }
+    }
+
+    private void getSellersByShop() throws IOException {
+        System.out.println("Enter shop name:");
+        String shopName = reader.readLine();
+        Shop shop = shopService.getShopByName(shopName);
+        if (shop != null){
+            sellerService.getSellersByShopId(shop.getId()).stream().map(Seller::toString).forEach(System.out::println);
+        } else {
+            System.out.println("No such shop");
+        }
     }
 
     private void distributeProduct() throws IOException {

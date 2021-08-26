@@ -77,4 +77,9 @@ public class Seller extends BaseEntity{
     public void setManager(Seller manager) {
         this.manager = manager;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s",getFirstName(),getLastName());
+    }
 }
