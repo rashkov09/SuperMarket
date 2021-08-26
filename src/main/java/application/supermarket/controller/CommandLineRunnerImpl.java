@@ -1,6 +1,8 @@
 package application.supermarket.controller;
 
 import application.supermarket.model.entity.Category;
+import application.supermarket.model.entity.Seller;
+import application.supermarket.model.entity.Shop;
 import application.supermarket.model.entity.Town;
 import application.supermarket.service.*;
 import application.supermarket.utils.ValidationUtil;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.validation.ConstraintViolation;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 @Component
@@ -45,14 +48,50 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
             switch (commandNumber) {
                 case 1 -> addCategory();
                 case 2 -> addTown();
+                case 3 -> addShop();
+                case 4 -> addSeller();
 
                 default -> {
                     System.out.println("Incorrect command, please try again!");
-                    return;
                 }
             }
         }
 
+    }
+
+    private void addSeller() throws IOException {
+        Seller seller = new Seller();
+        System.out.println("Enter seller details in format: firstName lastName age salary shopName");
+        String[] input = reader.readLine().split("\\s+");
+        seller.setFirstName(input[0]);
+        seller.setLastName(input[1]);
+        seller.setAge(Integer.parseInt(input[2]));
+        seller.setSalary(BigDecimal.valueOf(Long.parseLong(input[3])));
+        Shop shop  = shopService.getShopByName(input[4]);
+        seller.setShop(shop);
+        if (validationUtil.isValid(seller)){
+            sellerService.addSeller(seller);
+        }else {
+            System.out.println(validationUtil.getViolations(seller));
+        }
+
+    }
+
+    private void addShop() throws IOException {
+        Shop shop = new Shop();
+        System.out.println("Enter shop details in format: name address town");
+        String[] input = reader.readLine().split("\\s+");
+        shop.setName(input[0]);
+        shop.setAddress(input[1]);
+        Town town = townService.getTownByName(input[2]);
+        shop.setTown(town);
+        if (validationUtil.isValid(shop)){
+            shopService.addShop(shop);
+            System.out.println(Messages.ADDED_SHOP);
+        } else {
+            System.out.println(validationUtil.getViolations(shop));
+
+        }
     }
 
     private void addTown() throws IOException {
@@ -74,7 +113,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
            categoryService.addCategory(category);
            System.out.println(Messages.ADDED_CATEGORY);
        } else {
-          System.out.println(validationUtil.getViolations(category).stream().map(ConstraintViolation::getMessage).collect(Collectors.joining("\n")));
+          System.out.println(validationUtil.getViolations(category));
        }
 
     }

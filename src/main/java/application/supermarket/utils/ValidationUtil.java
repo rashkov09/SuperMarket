@@ -6,5 +6,7 @@ import java.util.Set;
 public interface ValidationUtil {
     <T> boolean isValid(T entity);
 
-    <T> Set<ConstraintViolation<T>> getViolations(T entity);
+    <T> String getViolations(T entity);
+
+
 }

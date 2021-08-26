@@ -18,4 +18,5 @@ public class Messages {
 
     public final static String ADDED_CATEGORY = "Successfully added category!";
     public final static String ADDED_TOWN = "Successfully added town!";
+    public final static String ADDED_SHOP = "Successfully added shop!";
 }
