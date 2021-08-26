@@ -16,7 +16,5 @@ public class Messages {
             "0 - for EXIT";
 
 
-    public final static String ADDED_CATEGORY = "Successfully added category!";
-    public final static String ADDED_TOWN = "Successfully added town!";
-    public final static String ADDED_SHOP = "Successfully added shop!";
+    public final static String ADDED_SUCCESSFULLY = "Successfully added %s!";
 }

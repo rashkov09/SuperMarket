@@ -65,7 +65,7 @@ public class Product extends BaseEntity{
         this.category = category;
     }
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     public Set<Shop> getShops() {
         return shops;
     }

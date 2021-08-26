@@ -21,7 +21,7 @@ public class Seller extends BaseEntity{
     }
 
     @Column(nullable = false)
-    @Size(min = 2)
+    @Size(min = 2, message = "First name must be at least 2 symbols long. ")
     public String getFirstName() {
         return firstName;
     }
@@ -31,7 +31,7 @@ public class Seller extends BaseEntity{
     }
 
     @Column(nullable = false)
-    @Size(min = 2)
+    @Size(min = 2, message = "Last name must be at least 2 symbols long.")
     public String getLastName() {
         return lastName;
     }
@@ -41,7 +41,7 @@ public class Seller extends BaseEntity{
     }
 
     @Column(nullable = false)
-    @Min(18)
+    @Min(value = 18, message = "Age must be greater than or equal to 18.")
     public Integer getAge() {
         return age;
     }
@@ -51,7 +51,7 @@ public class Seller extends BaseEntity{
     }
 
     @Column(nullable = false)
-    @Positive
+    @Positive(message = "Salary can't be negative number.")
     public BigDecimal getSalary() {
         return salary;
     }

@@ -17,4 +17,9 @@ public class SellerServiceImpl implements SellerService {
     public void addSeller(Seller seller) {
         sellerRepository.save(seller);
     }
+
+    @Override
+    public Seller getByFirstNameAndLastName(String firstName, String lastName) {
+        return sellerRepository.getByFirstNameAndLastName(firstName,lastName);
+    }
 }

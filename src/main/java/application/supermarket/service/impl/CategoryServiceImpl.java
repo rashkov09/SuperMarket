@@ -17,4 +17,9 @@ public class CategoryServiceImpl implements CategoryService {
     public void addCategory(Category category) {
         categoryRepository.save(category);
     }
+
+    @Override
+    public Category getByName(String name) {
+        return categoryRepository.getByName(name);
+    }
 }

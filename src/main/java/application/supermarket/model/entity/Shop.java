@@ -11,7 +11,7 @@ public class Shop extends BaseEntity {
     private String name;
     private Town town;
     private Set<Seller>  sellers;
-    private Set<Product> products;
+
 
 
     public Shop() {
